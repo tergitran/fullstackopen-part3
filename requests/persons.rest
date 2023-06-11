@@ -9,6 +9,19 @@ POST  http://localhost:3001/api/persons
 Content-Type: application/json
 
   {
-    "name": "Tran Dan",
-    "number": "111-222-333"
+    "name": "td",
+    "number": "111-222"
   }
+
+### Update person
+PUT  http://localhost:3001/api/persons/6484a32aa23989593de3cd26
+Content-Type: application/json
+
+  {
+    "number": "111-11111"
+  }
+### Get person
+GET  http://localhost:3001/api/persons/6484a32aa23989593de3cd26
+
+### info
+GET  http://localhost:3001/api/info
