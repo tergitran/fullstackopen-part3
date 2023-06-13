@@ -10,7 +10,7 @@ app.use(express.static("build"));
 app.use(cors());
 app.use(express.json());
 
-morgan.token("data-sent", function (req, res) {
+morgan.token("data-sent", function (req) {
   if (req.method === "POST") {
     return JSON.stringify(req.body);
   } else {
@@ -72,7 +72,7 @@ app.get("/api/persons/:id", (req, res, next) => {
 
 app.delete("/api/persons/:id", (req, res, next) => {
   Person.findByIdAndDelete(req.params.id)
-    .then((result) => {
+    .then(() => {
       res.status(204).end();
     })
     .catch((error) => {
@@ -103,6 +103,7 @@ const errorHandler = (error, request, response, next) => {
   } else if (error.name === "ValidationError") {
     return response.status(400).send({ error: error.message });
   }
+  next(error)
 };
 
 app.use(unknownEndpoint);
